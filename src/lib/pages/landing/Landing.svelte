@@ -38,9 +38,9 @@
   
   <!-- Content sections -->
   <div class="mx-auto max-w-[1920px]">
-    <section id="work" class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 mt-[18vh]">
+    <section id="work" class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 mt-[12vh] py-6">
       <h1 
-        class="absolute -top-4 ml-8 transition-transform duration-700 ease-out
+        class="absolute top-1 ml-8 transition-transform duration-700 ease-out
                text-5xl sm:text-5xl md:text-6xl font-medium tracking-wide 
                whitespace-nowrap opacity-90"
         style="transform: translateY(calc(var(--scroll-offset, 0) * (-0.1px))"

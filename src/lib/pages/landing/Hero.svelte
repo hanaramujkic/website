@@ -7,10 +7,10 @@
 <div class="relative w-full h-full overflow-hidden">
   <!-- Hero Text -->
   <div class="absolute top-32 left-[10%] z-20 md:left-[15%]">
-    <div class="text-white text-right flex flex-col items-end">
-      <h1 class="text-5xl sm:text-5xl md:text-6xl font-medium tracking-wide mb-2 whitespace-nowrap">SCENOGRAPHY</h1>
-      <h1 class="text-5xl sm:text-5xl md:text-6xl font-medium tracking-wide mb-2 whitespace-nowrap">+ COSTUME</h1>
-      <h1 class="text-5xl sm:text-5xl md:text-6xl font-medium tracking-wide whitespace-nowrap">DESIGN</h1>
+    <div class="text-white text-right flex flex-col items-end md:gap-4">
+      <h1 class="text-[2.5em] sm:text-5xl md:text-6xl font-medium tracking-wide whitespace-nowrap">SCENOGRAPHY</h1>
+      <h1 class="text-[2.5em] sm:text-5xl md:text-6xl font-medium tracking-wide whitespace-nowrap">+ COSTUME</h1>
+      <h1 class="text-[2.5em] sm:text-5xl md:text-6xl font-medium tracking-wide whitespace-nowrap">DESIGN</h1>
     </div>
   </div>
 
@@ -22,7 +22,7 @@
       <div slot="play-button">
         <button
           class="absolute z-20 group transform transition-all duration-300
-                 left-1/2 top-1/2 md:left-[75%] md:top-[60%]
+                 left-1/2 bottom-12 md:left-[70%] md:bottom-[30%]
                  -translate-x-1/2 -translate-y-1/2"
         >
           <div class="relative">

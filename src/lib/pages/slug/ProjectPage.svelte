@@ -1,38 +1,36 @@
 <!-- $lib/pages/slug/ProjectPage.svelte -->
 <script lang="ts">
+	import { ChevronLeft } from 'lucide-svelte';
   import type { Project } from '$lib/server/contentful';
+	import { Button } from "$lib/components/ui/button"
   import ProjectDetails from '$lib/components/portfolio/ProjectDetails.svelte';
 
   export let project: Project;
   let imageContainer: HTMLElement;
-  let currentImageIndex = 0;
+  let isScrolled = false;
+  let lastScrollTop = 0;
 
-  function handleScroll() {
-    if (!imageContainer) return;
+  function handleScroll(event) {
+    const target = event.target;
+    const scrollTop = target.scrollTop;
     
-    const images = imageContainer.querySelectorAll('img');
-    if (!images.length) return;
+    // Check if we've scrolled more than 50px
+    if (scrollTop > 50 && !isScrolled) {
+      isScrolled = true;
+    } else if (scrollTop <= 50 && isScrolled) {
+      isScrolled = false;
+    }
 
-    const containerRect = imageContainer.getBoundingClientRect();
-    let newIndex = currentImageIndex;
-
-    images.forEach((img, index) => {
-      const rect = img.getBoundingClientRect();
-      const midpoint = (rect.top + rect.bottom) / 2;
-      
-      if (midpoint > containerRect.top && midpoint < containerRect.bottom) {
-        newIndex = index;
-      }
-    });
-
-    currentImageIndex = newIndex;
+    lastScrollTop = scrollTop;
   }
 </script>
 
 <main class="min-h-screen flex flex-col md:flex-row px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">
-  <ProjectDetails {project} />
+  
 
-  <!-- Project Images -->
+	
+	<ProjectDetails {project} {isScrolled} />
+
   <div 
     bind:this={imageContainer}
     on:scroll={handleScroll}
@@ -40,10 +38,8 @@
   >
     {#if project.media?.length > 0}
       <div class="space-y-4 pb-4">
-        {#each project.media as image, i}
-          <div 
-            class="relative aspect-video md:aspect-auto md:h-screen"
-          >
+        {#each project.media as image}
+          <div class="relative aspect-video md:aspect-auto md:h-screen">
             <img 
               src={image.url} 
               alt={image.title}

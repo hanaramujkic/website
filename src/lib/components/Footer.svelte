@@ -29,11 +29,11 @@
 					<div class="mb-16 md:mb-0">
             <!-- <ContactForm textSize="text-lg" /> -->
 						<div class="space-y-2">
-              <div class="text-[4.5rem] leading-[1.1] md:text-[5rem] font-light tracking-wide text-white/30">
+              <div class="text-[4.5rem] leading-[1.1] md:text-[5rem] font-light tracking-wide text-white/20">
                 <div>HANA RAMUJKIC</div>
                 <!-- <div>RAMUJKIC</div> -->
               </div>
-              <p class="text-xl font-medium text-white/60">
+              <p class="text-xl font-medium text-white/20">
                 Scenographer & Costume Designer
               </p>
             </div>
@@ -72,8 +72,12 @@
         </div>
 
         <!-- Copyright at bottom -->
-        <div class="text-xs text-white/40">
-          © {new Date().getFullYear()}
+        <div class="text-xs text-white/30">
+          © {new Date().getFullYear()} 
+						<span class="text-white/20">
+							• web dev by
+							<a href="https://pipewriter.io" class="hover:underline hover:text-foreground">Pipewriter</a>
+						</span>
         </div>
       </div>
     </div>

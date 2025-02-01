@@ -3,7 +3,7 @@ import { getProjects } from '$lib/server/contentful';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async () => {
-	const { projects } = await getProjects();
+	const projects = await getProjects();  // Remove destructuring since getProjects returns array directly
 	const today = new Date().toISOString().split('T')[0];
 
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -21,11 +21,11 @@ export const GET: RequestHandler = async () => {
           <lastmod>${today}</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
-          ${project.media.map(media =>
-		`<image:image>
-               <image:loc>${media.url}</image:loc>
-               <image:title>${project.title}</image:title>
-             </image:image>`
+          ${project.media.map(media => `
+            <image:image>
+              <image:loc>${media.url}</image:loc>
+              <image:title>${project.title}</image:title>
+            </image:image>`
 	).join('')}
         </url>
       `).join('')}

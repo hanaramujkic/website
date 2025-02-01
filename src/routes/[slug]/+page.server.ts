@@ -1,34 +1,34 @@
 // routes/[slug]/+page.server.ts
 import type { PageServerLoad } from './$types';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ parent, params }) => {
-	try {
-		const { projects, slugMap, metadata } = await parent();
+	const { projects, metadata } = await parent();
 
-		// First try direct slug match
-		let project = projects.find(p => p.slug === params.slug);
-
-		// If not found, try slugMap
-		if (!project) {
-			project = projects.find(p => slugMap[p.title] === params.slug);
-		}
-
-		if (!project) {
-			return {
-				status: 404,
-				error: 'Project not found'
-			};
-		}
-
-		return {
-			project,
-			metadata: metadata[project.slug]
+	// Use the same slug logic as ProjectCard
+	const project = projects.find(p => {
+		const slugMap = {
+			"Die Riesen vom Berge": "die-riesen-vom-berge",
+			"Kapitän Nemos Bibliothek": "kapitan-nemos-bibliothek",
+			"Dippel. Diagnose Cin 3": "dippel-diagnose-cin-3",
+			"Reigen": "reigen",
+			"Melancholia": "melancholia",
+			"Der Kopf der Ariadne!": "der-kopf-der-ariadne",
+			"Cinderella": "cinderella"
 		};
-	} catch (error) {
-		console.error('Error loading project:', error);
-		return {
-			status: 500,
-			error: 'Failed to load project. Please try again later.'
-		};
+
+		const projectSlug = slugMap[p.title] || p.title.toLowerCase().replace(/ /g, '-');
+		return projectSlug === params.slug;
+	});
+
+	if (!project) {
+		throw error(404, {
+			message: 'Project not found'
+		});
 	}
+
+	return {
+		project,
+		metadata: metadata[params.slug]
+	};
 };

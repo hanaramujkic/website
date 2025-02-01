@@ -1,72 +1,18 @@
-<!-- $lib/components/Hero.svelte -->
-
-<script lang="ts">
-  import { Play } from 'lucide-svelte';
-
-  let showPlayer = false;
-
-  function openVideoPlayer() {
-    showPlayer = true;
-  }
-
-  function closeVideoPlayer() {
-    showPlayer = false;
-  }
-</script>
-
-<div class="relative w-full overflow-hidden">
-  <!-- Background Video -->
-  <video
-    class="absolute w-full h-auto object-cover"
-    autoplay
-    loop
-    muted
-    playsinline
-  >
-    <source src="die_riesen_vom_berge_trailer.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-
-  <!-- Content Overlay -->
-  <div class="relative z-10 md:h-[70vh] flex flex-col items-start p-4 sm:p-8 md:p-16">
-    <!-- Text and Button Container -->
-    <div class="flex items-center">
-      <!-- Text Overlay -->
-      <div class="text-white text-right border-r-2 border-white pr-4 sm:pr-8 md:pr-16 flex flex-col items-end pb-10">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold mb-2 whitespace-nowrap">SCENOGRAPHY</h1>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold mb-2 whitespace-nowrap">+ COSTUME</h1>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold whitespace-nowrap">DESIGN</h1>
+<!-- src/lib/pages/landing/About.svelte -->
+<section id="about" class="mb-16">
+  <hr class="border-t border-black dark:border-white w-full my-8" />
+  <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+    <div class="w-full md:w-1/2 relative">
+      <div class="shadow-xl w-4/5">
+        <img src="hana-ramujkic.jpeg" alt="Hana Ramujkic set designer photo" class="w-full h-auto rounded-lg">
       </div>
-      
-      <!-- Play Button -->
-      <button
-        class="ml-4 sm:ml-8 md:ml-16 bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 rounded-full p-4 flex-shrink-0"
-        on:click={openVideoPlayer}
-      >
-        <Play class="w-8 h-8 text-white" />
-      </button>
+    </div>
+    <div class="w-full md:w-1/2">
+      <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6">ABOUT</h2>
+      <div class="space-y-4">
+        <p>Hana Ramujkić is a multi-disciplinary set and costume designer with a unique background in opera singing. She combines her passion for writing, music, and visual arts in her theatrical designs, aiming to make theater relevant and accessible to younger audiences.</p>
+        <p>With a diverse educational background in linguistics, literature, and music, Hana brings a multifaceted approach to her work. She views set designers as the magicians of theater, creating visual frameworks that set the tone for entire productions. Her designs are characterized by deep storytelling through visual tools and a collaborative spirit, leading her to work with renowned directors across Europe.</p>
+      </div>
     </div>
   </div>
-
-  <!-- Video Player Modal -->
-  {#if showPlayer}
-    <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-      <div class="relative w-full max-w-4xl">
-        <button
-          class="absolute top-4 right-4 text-white text-2xl"
-          on:click={closeVideoPlayer}
-        >
-          ×
-        </button>
-        <video
-          class="w-full"
-          controls
-          autoplay
-        >
-          <source src="die_riesen_vom_berge_trailer.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-  {/if}
-</div>
+</section>

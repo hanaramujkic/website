@@ -9,7 +9,18 @@
 <svelte:head>
   <title>Hana Ramujkic - Set and Costume Designer</title>
   <meta name="description" content="Set and costume designer with a background in literature, music, and visual arts. Making theater magically accessible to younger audiences." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hana Ramujkic",
+    "jobTitle": "Set and Costume Designer",
+    "description": "Set and costume designer with a background in literature, music, and visual arts. Making theater magically accessible to younger audiences.",
+    "url": "https://hanaramujkic.com"
+  }
+  </script>
 </svelte:head>
+
 
 <ModeWatcher />
 

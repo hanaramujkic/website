@@ -1,5 +1,7 @@
 <!-- src/lib/components/VideoPlayer.svelte -->
 
+<!-- https://www.youtube.com/watch?v=8Dyvs9qxpz8 -->
+ 
 <script lang="ts">
   import { Play, X } from 'lucide-svelte';
   

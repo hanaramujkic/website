@@ -1,38 +1,59 @@
-<!-- $lib/components/Footer.svelte -->
-
-<script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import { Download } from "lucide-svelte";
-	import * as Popover from "$lib/components/ui/popover";
-	import ContactForm from "$lib/components/ContactForm.svelte";
-</script>
-
-<footer
-	class="flex justify-between items-center px-4 sm:px-8 md:px-16 lg:px-24 py-4"
->
-	<a class="text-lg sm:text-2xl text-start font-semibold" href="/">
-		© Hana Ramujkic 2024
-	</a>
-
-	<div class="flex items-center gap-6">
-		<a href="./#work" class="text-lg font-light hover:underline">Work</a>
-		<a href="./#about" class="text-lg font-light hover:underline">About</a>
-		<Popover.Root>
-			<Popover.Trigger asChild let:builder>
-				<Button builders={[builder]} variant="link" class="text-lg font-light hover:underline p-0 h-auto">Contact</Button>
-			</Popover.Trigger>
-			<Popover.Content class="w-80">
-				<ContactForm />
-			</Popover.Content>
-		</Popover.Root>
-	</div>
-	
-	<div class="flex gap-6">
-		<a href="./Hana_Ramujkic_Biography_eng2024.pdf" target="_blank" rel="noopener noreferrer">
-			<Button variant="secondary" size="sm" class="flex items-center gap-2">
-				<Download size={16} />
-				CV
-			</Button>
-		</a>
-	</div>
+<!-- src/lib/components/Footer.svelte -->
+<footer class="relative bg-black text-white">
+  <div class="mx-auto max-w-[1920px] px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 md:py-20">
+      <!-- Branding & Copyright -->
+      <div class="md:col-span-4 space-y-4">
+        <div class="space-y-2">
+          <h2 class="text-2xl md:text-3xl font-extralight tracking-wide">HANA RAMUJKIC</h2>
+          <p class="text-sm font-light text-white/60">Scenographer & Costume Designer</p>
+        </div>
+        <p class="text-sm text-white/40 pt-4">
+          © {new Date().getFullYear()} All rights reserved
+        </p>
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="md:col-span-4 space-y-4">
+        <h3 class="text-sm font-medium uppercase tracking-wider text-white/60">Contact</h3>
+        <ul class="space-y-3 text-sm">
+          <li>
+            <a href="mailto:hanaramujkic1@gmail.com" class="text-white/80 hover:text-white transition-colors">
+              hanaramujkic1@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="tel:+43677643151664" class="text-white/80 hover:text-white transition-colors">
+              +43 677 64 3151 64
+            </a>
+          </li>
+          <li class="text-white/80">
+            Vienna, Austria
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="md:col-span-4 space-y-4">
+        <h3 class="text-sm font-medium uppercase tracking-wider text-white/60">Quick Links</h3>
+        <ul class="space-y-3 text-sm">
+          <li>
+            <a href="/cv" class="text-white/80 hover:text-white transition-colors">
+              Curriculum Vitae
+            </a>
+          </li>
+          <li>
+            <a href="/#work" class="text-white/80 hover:text-white transition-colors">
+              Portfolio
+            </a>
+          </li>
+          <li>
+            <a href="/#about" class="text-white/80 hover:text-white transition-colors">
+              About
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </footer>

@@ -22,28 +22,33 @@
 
 <svelte:window on:keydown={handleKeydown}/>
 
-<!-- Background Video -->
-<div class="relative w-full h-full">
+<!-- Background Video Container -->
+<div class="relative w-[120%] h-full -left-[10%] overflow-hidden">
   <iframe
     src="https://www.youtube.com/embed/{videoId}?autoplay=1&controls=0&mute=1&loop=1&playlist={videoId}&start=8&modestbranding=1"
-    class="absolute w-full h-full"
+    class="absolute w-full h-[120%] -bottom-[10%] scale-125"
     title="Background video"
     style="pointer-events: none;"
   ></iframe>
 
-  <slot name="play-button">
-    <button
-      on:click={openVideoPlayer}
-      class="absolute z-20 bg-white/20 hover:bg-white/30 rounded-full p-4 transition-all"
-    >
-      <Play class="w-8 h-8 text-white" />
-    </button>
-  </slot>
+  <!-- Play Button Container - Forward click events -->
+  <button 
+    class="absolute inset-0 z-10"
+    on:click={() => openVideoPlayer()}
+  >
+    <slot name="play-button">
+      <button
+        class="absolute z-20 bg-white/20 hover:bg-white/30 rounded-full p-4 transition-all"
+      >
+        <Play class="w-8 h-8 text-white" />
+      </button>
+    </slot>
+  </button>
 </div>
 
 <!-- Modal -->
 {#if showPlayer}
-  <div 
+  <button 
     class="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
     on:click={closeVideoPlayer}
   >
@@ -65,7 +70,7 @@
         allowfullscreen
       ></iframe>
     </div>
-  </div>
+  </button>
 {/if}
 
 <style>
@@ -73,3 +78,4 @@
     border: 0;
   }
 </style>
+

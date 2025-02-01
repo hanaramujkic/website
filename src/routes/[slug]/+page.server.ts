@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ parent, params }) => {
 	try {
-		const { projects, slugMap } = await parent();
+		const { projects, slugMap, metadata } = await parent();
 
 		// First try direct slug match
 		let project = projects.find(p => p.slug === params.slug);
@@ -20,7 +20,10 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 			};
 		}
 
-		return { project };
+		return {
+			project,
+			metadata: metadata[project.slug]
+		};
 	} catch (error) {
 		console.error('Error loading project:', error);
 		return {

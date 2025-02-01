@@ -23,7 +23,7 @@
 
 <svelte:window bind:scrollY={y} />
 
-<section id="about" class="relative overflow-hidden" bind:this={container}>
+<div class="relative overflow-hidden" bind:this={container}>
 	<!-- <hr class="border-t border-black dark:border-white w-full mb-16" /> -->
 
 	<div
@@ -73,4 +73,4 @@
 			</div>
 		</div>
 	</div>
-</section>
+</div>

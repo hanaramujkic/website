@@ -1,6 +1,7 @@
 <!-- routes/+page.svelte -->
 
 <script lang="ts">
+  import type { PageData } from './$types';
   import { onMount } from 'svelte';
   import Hero from "$lib/components/Hero.svelte";
   import Portfolio from "$lib/components/Portfolio.svelte";

@@ -31,17 +31,17 @@
 </script>
 
 <div class="flex flex-col gap-4 w-full">
-  <div class="flex items-center w-full group p-3 rounded-lg transition-colors hover:bg-white/5">
-    <Mail class="h-6 w-6 mr-4 text-white/20" />
+  <div class="flex items-center w-full group p-3 rounded-lg transition-colors hover:bg-foreground/5">
+    <Mail class="h-6 w-6 mr-4 text-foreground/20" />
     <a href="mailto:{email}" class="flex-grow">
-      <span class="{textSize} text-white/90 hover:text-white transition-colors">
+      <span class="{textSize} text-foreground/90 hover:text-foreground transition-colors">
         {email}
       </span>
     </a>
     <Button 
       variant="ghost" 
       size="icon" 
-      class="h-8 w-8 ml-2 text-white/60 hover:text-white/90 hover:bg-white/10"
+      class="h-8 w-8 ml-2 text-foreground/60 hover:text-foreground/90 hover:bg-foreground/10"
       on:click={() => copyToClipboard(email, 'email')}
     >
       {#if copiedEmail}
@@ -52,22 +52,22 @@
     </Button>
   </div>
 
-  <div class="flex items-center w-full group p-3 rounded-lg transition-colors hover:bg-white/5">
-    <Phone class="h-6 w-6 mr-4 text-white/30" />
+  <div class="flex items-center w-full group p-3 rounded-lg transition-colors hover:bg-foreground/5">
+    <Phone class="h-6 w-6 mr-4 text-foreground/30" />
     <a 
       href={getWhatsAppLink(phone)} 
       target="_blank" 
       rel="noopener noreferrer" 
       class="flex-grow"
     >
-      <span class="{textSize} text-white/90 hover:text-white transition-colors">
+      <span class="{textSize} text-foreground/90 hover:text-foreground transition-colors">
         {phone}
       </span>
     </a>
     <Button 
       variant="ghost" 
       size="icon"
-      class="h-8 w-8 ml-2 text-white/60 hover:text-white/90 hover:bg-white/10"
+      class="h-8 w-8 ml-2 text-foreground/60 hover:text-foreground/90 hover:bg-foreground/10"
       on:click={() => copyToClipboard(phone, 'phone')}
     >
       {#if copiedPhone}

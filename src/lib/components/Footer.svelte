@@ -8,7 +8,7 @@
 <div class="relative">
   <!-- Contact Form Container -->
   <!-- <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full w-full max-w-lg"> -->
-  <div class="absolute left-0 transform ___-translate-x-1/2 -translate-y-full w-full max-w-xl
+  <!-- <div class="absolute left-0 transform ___-translate-x-1/2 -translate-y-full w-full max-w-xl
 							px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32
 	">
     <div class="bg-zinc-950 dark:bg-black rounded-t-[3rem] border border-white/10 px-10 pt-10 pb-6
@@ -16,7 +16,7 @@
          
       <ContactForm textSize="text-lg" />
     </div>
-  </div>
+  </div> -->
 
   <!-- Footer -->
   <footer class="bg-zinc-950 dark:bg-black text-white border-t border-white/10 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">

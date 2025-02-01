@@ -3,6 +3,6 @@
   import ContactForm from '$lib/components/cta/ContactForm.svelte';
 </script>
 
-<div class="container max-w-md">
-	<ContactForm textSize="text-2xl" />
+<div class="container md:max-w-lg">
+	<ContactForm textSize="text-xl md:text-2xl" />
 </div>

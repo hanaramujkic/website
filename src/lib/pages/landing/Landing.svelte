@@ -4,7 +4,7 @@
   import Hero from './Hero.svelte';
   import About from './About.svelte';
   import Contact from './Contact.svelte';
-  import Portfolio from '$lib/components/Portfolio.svelte';
+  import Portfolio from '$lib/components/portfolio/Portfolio.svelte';
   
   export let projects: Project[] = [];
   export let isLoading = false;

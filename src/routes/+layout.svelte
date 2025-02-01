@@ -1,38 +1,36 @@
 <!-- src/routes/+layout.svelte -->
-
 <script lang="ts">
   import "../app.css";
+  import { page } from "$app/stores";
   import Navbar from "$lib/components/Navbar.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import { ModeWatcher } from "mode-watcher";
   
-  // Default metadata that can be overridden by child pages
-  export let title = "Hana Ramujkic - Set and Costume Designer";
-  export let description = "Set and costume designer with a background in literature, music, and visual arts. Making theater magically accessible to younger audiences.";
-  export let image = "https://hanaramujkic.com/hana-ramujkic.jpeg"; 
-  export let url = "https://hanaramujkic.com";
+  export let data;
+  
+  $: currentSlug = $page.url.pathname.slice(1) || 'home';
+  $: seoData = data.metadata[currentSlug] || data.metadata.home;
 </script>
 
 <svelte:head>
-  <!-- Essential Meta Tags -->
-  <title>{title}</title>
-  <meta name="description" content={description} />
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={url} />
+  <link rel="canonical" href={seoData.url} />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content={url} />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={image} />
+  <meta property="og:url" content={seoData.url} />
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:image" content={seoData.image} />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content={url} />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={image} />
+  <meta name="twitter:url" content={seoData.url} />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  <meta name="twitter:image" content={seoData.image} />
 
   <!-- Additional SEO Meta Tags -->
   <meta name="robots" content="index, follow" />
@@ -40,32 +38,33 @@
   <meta name="author" content="Hana Ramujkic" />
 
   <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Hana Ramujkic",
-    "jobTitle": "Set and Costume Designer",
-    "description": "${description}",
-    "url": "${url}",
-    "image": "${image}",
-    "sameAs": [
-      "https://www.linkedin.com/in/hana-ramujkic", // Add if exists
-      "https://www.instagram.com/hana.ramujkic"    // Add if exists
-    ],
-    "workLocation": {
-      "@type": "City",
-      "name": "Vienna"  // Update with correct city
-    },
-    "knowsAbout": [
-      "Set Design",
-      "Costume Design",
-      "Theater Production",
-      "Scenography",
-      "Stage Design"
-    ]
-  }
-  </script>
+  {@html `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Hana Ramujkic",
+      "jobTitle": "Set and Costume Designer",
+      "description": "${seoData.description}",
+      "url": "${seoData.url}",
+      "image": "${seoData.image}",
+      "sameAs": [
+        "https://www.instagram.com/hana.ramujkic"
+      ],
+      "workLocation": {
+        "@type": "City",
+        "name": "Vienna"
+      },
+      "knowsAbout": [
+        "Set Design",
+        "Costume Design",
+        "Theater Production",
+        "Scenography",
+        "Stage Design"
+      ]
+    }
+    </script>
+  `}
 </svelte:head>
 
 <ModeWatcher />

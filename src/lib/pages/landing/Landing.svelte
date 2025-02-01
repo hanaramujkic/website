@@ -13,14 +13,20 @@
 
 <main>
   <!-- Full viewport hero section -->
-  <section class="h-[80vh] relative">
+  <section class="h-[80vh] relative border-b">
     <Hero />
   </section>
   
   <!-- Content sections with consistent max-width -->
   <div class="mx-auto max-w-[1920px]">
-    <section id="work" class="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 py-24">
-      <hr class="border-t border-black dark:border-white w-full mb-16" />
+    <section id="work" class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 mt-[12vh]">
+			
+			<h1 class="absolute -top-4 ml-8
+				text-5xl sm:text-5xl md:text-6xl font-medium tracking-wide mb-8 md:mb-12 whitespace-nowrap">
+				WORK
+			</h1>
+
+      <!-- <hr class="border-t border-black dark:border-white w-full mb-16" /> -->
       {#if isLoading}
         <p>Loading projects...</p>
       {:else if error}

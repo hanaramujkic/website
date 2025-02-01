@@ -1,29 +1,18 @@
 <!-- src/lib/components/VideoPlayer.svelte -->
-
-<!-- https://www.youtube.com/watch?v=8Dyvs9qxpz8 -->
- 
 <script lang="ts">
   import { Play, X } from 'lucide-svelte';
   
-  export let videoUrl: string;
-  export let posterUrl: string | undefined = undefined;
-  export let title: string | undefined = undefined;
-  
+  export let videoId = '8Dyvs9qxpz8';
   let showPlayer = false;
-  let videoElement: HTMLVideoElement;
 
   function openVideoPlayer() {
     showPlayer = true;
   }
 
   function closeVideoPlayer() {
-    if (videoElement) {
-      videoElement.pause();
-    }
     showPlayer = false;
   }
 
-  // Handle Escape key
   function handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape' && showPlayer) {
       closeVideoPlayer();
@@ -34,56 +23,53 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <!-- Background Video -->
-<div class="relative">
-  <video
-    class="absolute w-full h-auto object-cover"
-    autoplay
-    loop
-    muted
-    playsinline
-    poster={posterUrl}
-  >
-    <source src={videoUrl} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+<div class="relative w-full h-full">
+  <iframe
+    src="https://www.youtube.com/embed/{videoId}?autoplay=1&controls=0&mute=1&loop=1&playlist={videoId}&start=8&modestbranding=1"
+    class="absolute w-full h-full"
+    title="Background video"
+    style="pointer-events: none;"
+  ></iframe>
 
-  <!-- Play Button -->
-  <button
-    class="ml-4 sm:ml-8 md:ml-16 bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 rounded-full p-4"
-    on:click={openVideoPlayer}
-    aria-label={`Play ${title || 'video'}`}
-  >
-    <Play class="w-8 h-8 text-white" />
-  </button>
+  <slot name="play-button">
+    <button
+      on:click={openVideoPlayer}
+      class="absolute z-20 bg-white/20 hover:bg-white/30 rounded-full p-4 transition-all"
+    >
+      <Play class="w-8 h-8 text-white" />
+    </button>
+  </slot>
 </div>
 
 <!-- Modal -->
 {#if showPlayer}
   <div 
-    class="fixed inset-0 bg-black/75 flex items-center justify-center z-50"
+    class="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
     on:click={closeVideoPlayer}
   >
     <div 
-      class="relative w-full max-w-4xl mx-4"
+      class="relative w-full max-w-5xl mx-4"
       on:click|stopPropagation={() => {}}
     >
       <button
-        class="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
+        class="absolute -top-12 right-0 text-white/80 hover:text-white transition-colors"
         on:click={closeVideoPlayer}
-        aria-label="Close video"
       >
         <X class="w-6 h-6" />
       </button>
       
-      <video
-        bind:this={videoElement}
-        class="w-full rounded-lg"
-        controls
-        autoplay
-      >
-        <source src={videoUrl} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <iframe
+        src="https://www.youtube.com/embed/{videoId}?autoplay=1&modestbranding=1"
+        class="w-full aspect-video rounded-lg"
+        title="Video player"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 {/if}
+
+<style>
+  iframe {
+    border: 0;
+  }
+</style>

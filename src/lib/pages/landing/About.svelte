@@ -23,8 +23,8 @@
 
 <svelte:window bind:scrollY={y}/>
 
-<section id="about" class="relative overflow-hidden py-24" bind:this={container}>
-  <hr class="border-t border-black dark:border-white w-full mb-16" />
+<section id="about" class="relative overflow-hidden" bind:this={container}>
+  <!-- <hr class="border-t border-black dark:border-white w-full mb-16" /> -->
   
   <div class="flex flex-col md:flex-row gap-8 md:gap-16 mx-auto max-w-[1920px] px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">
     <div class="w-full md:w-1/2 relative overflow-hidden">

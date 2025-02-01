@@ -29,7 +29,7 @@
   }
 </script>
 
-<div class="min-h-screen flex flex-col md:flex-row px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">
+<main class="min-h-screen flex flex-col md:flex-row px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">
   <ProjectDetails {project} />
 
   <!-- Project Images -->
@@ -58,7 +58,7 @@
       </div>
     {/if}
   </div>
-</div>
+</main>
 
 <style>
   /* Hide scrollbar but maintain functionality */

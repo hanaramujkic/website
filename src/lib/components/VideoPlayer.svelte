@@ -52,7 +52,7 @@
     class="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
     on:click={closeVideoPlayer}
   >
-    <div 
+    <button 
       class="relative w-full max-w-5xl mx-4"
       on:click|stopPropagation={() => {}}
     >
@@ -69,7 +69,7 @@
         title="Video player"
         allowfullscreen
       ></iframe>
-    </div>
+    </button>
   </button>
 {/if}
 

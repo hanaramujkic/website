@@ -1,14 +1,11 @@
 <!-- $lib/components/Menu.svelte -->
-
 <script lang="ts">
   import { fly } from 'svelte/transition';
   import { cubicInOut } from 'svelte/easing';
-  import { Menu as MenuIcon, X, Download } from 'lucide-svelte';
+  import { Menu as MenuIcon, X } from 'lucide-svelte';
   import { Button } from "$lib/components/ui/button";
 
-  export let darkMode = false;
   export let navItems = [];
-
   let isOpen = false;
 
   function toggleMenu() {
@@ -24,54 +21,42 @@
   <Button 
     on:click={toggleMenu} 
     variant="ghost" 
-    size="icon" 
-    class="relative z-50 {isOpen ? (darkMode ? 'text-black' : 'text-white') : 'text-current'}"
+    size="icon"
+    class="relative z-50"
   >
     {#if isOpen}
-      <X class="h-6 w-6" />
+      <X class="h-4 w-4" />
     {:else}
-      <MenuIcon class="h-6 w-6" />
+      <MenuIcon class="h-4 w-4" />
     {/if}
   </Button>
 
   {#if isOpen}
-    <div class="fixed inset-0 z-40" transition:fly="{{ opacity: 0, duration: 300 }}">
-      <div 
-        class="absolute inset-0 bg-gray-700 bg-opacity-70"
-        on:click={closeMenu}
-      ></div>
-      
+    <button 
+      class="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
+      transition:fly={{ opacity: 0, duration: 200 }}
+      on:click={closeMenu}
+    >
       <div
-        class="absolute inset-y-0 right-0 w-64 {darkMode ? 'bg-white text-black' : 'bg-black text-white'} flex items-center justify-center"
-        transition:fly="{{ x: '100%', duration: 300, easing: cubicInOut }}"
+        class="absolute top-[3.5rem] left-0 right-0 border-b bg-background p-4"
+        transition:fly={{ y: -100, duration: 200, easing: cubicInOut }}
       >
-        <nav class="w-full px-8">
-          <ul class="text-2xl space-y-6">
+        <nav class="container">
+          <ul class="space-y-4">
             {#each navItems as item}
-              <li class="w-full">
-                <a
+              <li>
+								<a
                   href={item.href}
-                  class="relative overflow-hidden block p-2 w-full"
+                  class="block text-lg py-2 text-foreground/60 hover:text-foreground transition-colors"
                   on:click={closeMenu}
                 >
-                  <span class="block transition-transform duration-300 hover:translate-y-[-100%]">
-                    {item.label}
-                  </span>
-                  <span class="absolute inset-0 flex items-center justify-center {darkMode ? 'bg-black text-white' : 'bg-white text-black'} transition-transform duration-300 translate-y-full hover:translate-y-0 w-full">
-                    {item.label}
-                  </span>
+                  {item.label}
                 </a>
               </li>
             {/each}
           </ul>
-          <a href="./Hana_Ramujkic_Biography_eng2024.pdf" target="_blank" rel="noopener noreferrer">
-            <Button variant="secondary" size="sm" class="mt-6 w-full flex items-center justify-center gap-2">
-              <Download size={16} />
-              Download CV
-            </Button>
-          </a>
         </nav>
       </div>
-    </div>
+    </button >
   {/if}
 </div>

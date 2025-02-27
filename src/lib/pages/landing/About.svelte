@@ -56,19 +56,24 @@
 
 			<div class="space-y-6 text-lg font-light leading-relaxed">
 				<p>
-					Hana Ramujkić is a scene and costume designer who brings her
-					background in opera, literature, and classical music to create
-					distinctive theatrical environments.
+					Hana Ramujkić is a set and costume designer from Belgrade with a
+					background in classical singing and comparative literature. She
+					studied stage design at the University of Music and Performing Arts
+					Graz and has since worked on international theater and opera
+					productions, including engagements with Neue Oper Wien, Oper
+					Wuppertal, Staatstheater Wiesbaden, and HEMU Lausanne.
 				</p>
 				<p>
-					Her work combines traditional storytelling with contemporary 3D design
-					tools, making theater accessible and engaging for modern audiences
-					while preserving its artistic integrity.
+					As a design assistant, she has contributed to productions at
+					prestigious institutions such as Burgtheater Wien, Akademietheater,
+					Oper Graz, the Salzburg Festival, and in film production. Ramujkić
+					collaborates with renowned artists, including Annette Murschetz,
+					Martin Kušej, Ingo Kerkhof, Christian Thausing, and Henry Mason.
 				</p>
 				<p>
-					Throughout Europe, she has collaborated with renowned directors at
-					leading theaters and opera houses, including Theater Basel, Konzert
-					Theater Bern, and Staatstheater Mainz.
+					Her work is driven by a passion for deconstructing theater—both
+					textually and aesthetically—stripping it down to its essence and
+					revealing its unfiltered core to the audience.
 				</p>
 			</div>
 		</div>

@@ -75,8 +75,8 @@
         <div class="text-xs text-white/30">
           © {new Date().getFullYear()} 
 						<span class="text-white/20">
-							• web dev by
-							<a href="https://pipewriter.io" class="hover:underline hover:text-foreground">Pipewriter</a>
+							• dev by
+							<a href="https://pipewriter.io" class="hover:underline hover:text-foreground">pipewriter</a>
 						</span>
         </div>
       </div>

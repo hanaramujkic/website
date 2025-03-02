@@ -1,89 +1,117 @@
 <!-- $lib/pages/slug/ProjectPage.svelte -->
 <script lang="ts">
-  import { ChevronLeft } from 'lucide-svelte';
+  import { ChevronLeft, ChevronRight } from 'lucide-svelte';
   import type { Project } from '$lib/server/contentful';
   import { Button } from "$lib/components/ui/button";
-  import * as Popover from "$lib/components/ui/popover";
-  import ContactForm from '$lib/components/cta/ContactForm.svelte';
   import { onMount } from 'svelte';
 
   export let project: Project;
+  export let projects: Project[] = [];
   
-  // Simple project information display
-  const projectInfo = [];
-  if (project.venue) projectInfo.push({ label: "Theatre", value: project.venue });
-  if (project.director) projectInfo.push({ label: "Directed by", value: project.director });
-  if (project.setDesigner) projectInfo.push({ label: "Set design", value: project.setDesigner });
-  if (project.costumeDesigner) projectInfo.push({ label: "Costume design", value: project.costumeDesigner });
-  if (project.photographer) projectInfo.push({ label: "Photos", value: project.photographer });
+  let currentIndex = -1;
+  let prevProject: Project | null = null;
+  let nextProject: Project | null = null;
+  
+  onMount(() => {
+    if (projects.length > 0) {
+      currentIndex = projects.findIndex(p => p.id === project.id);
+      if (currentIndex > 0) {
+        prevProject = projects[currentIndex - 1];
+      }
+      if (currentIndex < projects.length - 1) {
+        nextProject = projects[currentIndex + 1];
+      }
+    }
+  });
+
+  // Project info columns setup
+  const leftColumnItems = [];
+  const rightColumnItems = [];
+  
+  // Left column - Main info
+  if (project.writer) leftColumnItems.push({ value: project.writer });
+  if (project.director) leftColumnItems.push({ label: "Direction", value: project.director });
+  if (project.venue) leftColumnItems.push({ label: "Theatre", value: project.venue });
+  
+  // Right column - Production info
+  if (project.setDesigner) rightColumnItems.push({ label: "Set", value: project.setDesigner });
+  if (project.costumeDesigner) rightColumnItems.push({ label: "Costumes", value: project.costumeDesigner });
+  if (project.conductor) rightColumnItems.push({ label: "Music", value: project.conductor });
+  if (project.photographer) rightColumnItems.push({ label: "Photography", value: project.photographer });
 </script>
 
 <main class="min-h-screen bg-background">
-
-	<!-- Project Header -->
-  <header class="pt-24 pb-12 z-10 py-4 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 bg-background/95 backdrop-blur-sm border-b">
-    <div class="mx-auto max-w-[1920px] flex flex-col sm:flex-row justify-between gap-4">
-      <!-- Project Title Section -->
-      <div class="flex-1">
-        <h1 class="text-2xl md:text-3xl font-semibold">{project.title}</h1>
-        {#if project.writer}
-          <p class="text-sm md:text-base text-foreground/60">{project.writer}</p>
-        {/if}
-      </div>
+  <!-- Project Header -->
+  <header class="pt-24 pb-8 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 bg-background">
+    <div class="mx-auto max-w-[1920px]">
+      <!-- Project Title -->
+      <h1 class="text-3xl md:text-4xl font-semibold mb-1">{project.title}</h1>
       
-      <!-- Project Details Section - Desktop -->
-      <div class="md:flex flex _flex-row flex-wrap gap-x-8 gap-y-1 items-center">
-        {#each projectInfo as info}
-          <div class="text-right">
-            <div class="text-xs text-foreground/50">{info.label}</div>
-            <div class="text-sm font-medium">{info.value}</div>
-          </div>
-        {/each}
-      </div>
-      
-      <!-- Actions -->
-      <div class="flex items-center gap-2">
-        <a href="/#work" class="group inline-flex items-center">
-          <Button variant="outline" size="sm" class="gap-1">
-            <ChevronLeft class="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-            <span class="hidden sm:inline">Back</span>
-          </Button>
-        </a>
-        
-        <Popover.Root>
-          <Popover.Trigger asChild let:builder>
-            <Button builders={[builder]} variant="secondary" size="sm">
-              Contact
-            </Button>
-          </Popover.Trigger>
-          <Popover.Content>
-            <ContactForm textSize="text-sm" />
-          </Popover.Content>
-        </Popover.Root>
-      </div>
-    </div>
-    
-    <!-- Project Details Section - Mobile -->
-    <div class="md:hidden flex flex-row flex-wrap gap-x-6 gap-y-1 mt-3">
-      {#each projectInfo as info}
-        <div>
-          <div class="text-xs text-foreground/50">{info.label}</div>
-          <div class="text-sm font-medium">{info.value}</div>
+      <!-- Project Info Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-16 mt-6">
+        <!-- Left Column -->
+        <div class="space-y-2">
+          {#each leftColumnItems as item}
+            <div>
+              {#if item.label}
+                <div class="text-sm text-foreground/70">{item.label}</div>
+              {/if}
+              <div class="text-base font-medium">{item.value}</div>
+            </div>
+          {/each}
         </div>
-      {/each}
+        
+        <!-- Right Column -->
+        <div class="space-y-2 flex flex-col items-start md:items-end">
+          {#each rightColumnItems as item}
+            <div class="md:text-right">
+              {#if item.label}
+                <div class="text-sm text-foreground/70">{item.label}</div>
+              {/if}
+              <div class="text-base font-medium">{item.value}</div>
+            </div>
+          {/each}
+          
+          <!-- Navigation Controls -->
+          <div class="flex gap-2 mt-auto pt-4">
+            <a href="/#work" class="group">
+              <Button variant="outline" size="icon" class="h-9 w-9">
+                <ChevronLeft class="h-4 w-4" />
+              </Button>
+            </a>
+            
+            {#if prevProject}
+              <a href="/{prevProject.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}" class="group">
+                <Button variant="outline" size="icon" class="h-9 w-9">
+                  <ChevronLeft class="h-4 w-4" />
+                </Button>
+              </a>
+            {/if}
+            
+            {#if nextProject}
+              <a href="/{nextProject.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}" class="group">
+                <Button variant="outline" size="icon" class="h-9 w-9">
+                  <ChevronRight class="h-4 w-4" />
+                </Button>
+              </a>
+            {/if}
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Project Image Gallery -->
-  <div class="gallery px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 py-8">
+  <!-- Project Image Gallery - Masonry Layout -->
+  <div class="gallery px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 pb-16">
     {#if project.media?.length > 0}
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="masonry-grid">
         {#each project.media as image, i}
-          <div class="gallery-item overflow-hidden {i === 0 ? 'md:col-span-2' : ''}">
+          <div class="masonry-item">
             <img 
               src={image.url} 
               alt={image.title || `${project.title} - Image ${i + 1}`}
-              class="w-full h-auto object-contain"
+              class="w-full h-auto"
+              loading="lazy"
             />
           </div>
         {/each}
@@ -97,12 +125,41 @@
 </main>
 
 <style>
-  /* Optional: Add subtle animation to gallery items */
-  .gallery-item {
-    transition: transform 0.2s ease-in-out;
+  /* True Masonry Layout using CSS columns */
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 16px;
   }
   
-  .gallery-item:hover {
-    transform: translateY(-2px);
+  @media (min-width: 640px) {
+    .masonry-grid {
+      column-count: 2;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .masonry-grid {
+      column-count: 3;
+    }
+  }
+  
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    border-radius: 2px;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  /* Ensure images load smoothly */
+  .masonry-item img {
+    display: block;
+    transition: opacity 0.3s;
+  }
+  
+  /* Optional: subtle hover effect */
+  .masonry-item:hover {
+    opacity: 0.95;
   }
 </style>

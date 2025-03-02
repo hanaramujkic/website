@@ -60,12 +60,13 @@
       {/if}
     </section>
 
-    <section id="about" class="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 py-20">
-			<hr class="border-t pb-12">
+    <section id="about" class="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 bg-black">
+			<!-- <hr class="border-t pb-12"> -->
 			<About />
-    </section>
     
-		<section class="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 pt-16 pb-24">
+		</section>
+    
+		<section class="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 pt-24 pb-20">
       <Contact />
     </section>
   </div>

@@ -1,12 +1,11 @@
 <!-- $lib/pages/slug/ProjectPage.svelte -->
 <script lang="ts">
 	import type { Project } from "$lib/server/contentful";
-  import ProjectNavigation from '$lib/components/portfolio/ProjectNavigation.svelte';
+	import ProjectNavigation from "$lib/components/portfolio/ProjectNavigation.svelte";
 
 	export let project: Project;
-  export let projects: Project[] = [];
+	export let projects: Project[] = [];
 
-	
 	// Create an array of project details to simplify rendering
 	const projectDetails = [
 		{ label: "Regie", value: project.director },
@@ -14,15 +13,13 @@
 		{ label: "Set Design", value: project.setDesigner },
 		{ label: "Kostüme", value: project.costumeDesigner },
 		{ label: "Mask Design & Sculpting", value: project.maskDesignAndSculpting },
-		{ label: "Photos", value: project.photographer }
-	].filter(detail => detail.value); // Filter out undefined values
+		{ label: "Photos", value: project.photographer },
+	].filter((detail) => detail.value); // Filter out undefined values
 </script>
 
 <main
 	class="min-h-screen pt-24 md:pt-28 pb-16 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 bg-background"
 >
-
-
 	<div class="mx-auto max-w-[1920px]">
 		<!-- Top section: First image (left) and details (right) -->
 		{#if project.media?.length > 0}
@@ -59,6 +56,10 @@
 							{detail.value}
 						</p>
 					{/each}
+
+					<div class="mt-8">
+						<ProjectNavigation currentProject={project} {projects} />
+					</div>
 				</div>
 			</div>
 

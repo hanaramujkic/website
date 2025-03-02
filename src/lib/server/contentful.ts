@@ -19,6 +19,7 @@ export interface Project {
 	director?: string;
 	setDesigner?: string;
 	costumeDesigner?: string;
+	maskDesignAndSculpting?: string;
 	city?: {
 		lat: number;
 		lon: number;
@@ -92,6 +93,7 @@ function mapContentfulItemToProject(item: any): Project {
 		director: item.fields.director,
 		setDesigner: item.fields.setDesigner,
 		costumeDesigner: item.fields.costumeDesigner,
+		maskDesignAndSculpting: item.fields.maskDesignAndSculpting,
 		city: item.fields.city,
 		photographer: item.fields.photographer,
 		media: item.fields.media?.map((media: any) => {

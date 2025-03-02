@@ -2,7 +2,7 @@
 <script lang="ts">
 	import type { Project } from "$lib/server/contentful";
 	import ProjectNavigation from "$lib/components/portfolio/ProjectNavigation.svelte";
-
+	import Contact from "$lib/pages/landing/Contact.svelte"
 	export let project: Project;
 	export let projects: Project[] = [];
 
@@ -84,6 +84,14 @@
 			</div>
 		{/if}
 	</div>
+
+	<!-- Contact Section with Top Gradient -->
+<section class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 pt-24 pb-12">
+  <!-- Top gradient from black to transparent -->
+  <!-- <div class="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-black to-transparent pointer-events-none"></div> -->
+  <Contact />
+</section>
+
 </main>
 
 <style>

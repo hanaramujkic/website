@@ -2,7 +2,9 @@
 <script lang="ts">
 	import type { Project } from "$lib/server/contentful";
 	import ProjectNavigation from "$lib/components/portfolio/ProjectNavigation.svelte";
-	import Contact from "$lib/pages/landing/Contact.svelte"
+	import Contact from "$lib/pages/landing/Contact.svelte";
+	import ImageModal from "$lib/components/portfolio/ImageModal.svelte";
+	
 	export let project: Project;
 	export let projects: Project[] = [];
 
@@ -15,6 +17,30 @@
 		{ label: "Mask Design & Sculpting", value: project.maskDesignAndSculpting },
 		{ label: "Photos", value: project.photographer },
 	].filter((detail) => detail.value); // Filter out undefined values
+	
+	// Modal state
+	let isModalOpen = false;
+	let currentImageIndex = 0;
+	
+	// All project images in a single array for navigation
+	$: allImages = project.media || [];
+	
+	function openModal(index: number) {
+		currentImageIndex = index;
+		isModalOpen = true;
+	}
+	
+	function goToPreviousImage() {
+		if (currentImageIndex > 0) {
+			currentImageIndex -= 1;
+		}
+	}
+	
+	function goToNextImage() {
+		if (currentImageIndex < allImages.length - 1) {
+			currentImageIndex += 1;
+		}
+	}
 </script>
 
 <main
@@ -26,11 +52,16 @@
 			<div class="flex flex-col md:flex-row md:gap-12 lg:gap-16 xl:gap-20 mb-8">
 				<!-- Featured Image - Left 2/3 on desktop, full width on mobile -->
 				<div class="w-full md:w-2/3 mb-8 md:mb-0">
-					<img
-						src={project.media[0].url || "/placeholder.svg"}
-						alt={project.media[0].title || project.title}
-						class="w-full h-auto"
-					/>
+					<button 
+						class="w-full cursor-zoom-in focus:outline-none transform transition-transform duration-200 hover:opacity-95 hover:scale-[1.005]"
+						on:click={() => openModal(0)}
+					>
+						<img
+							src={project.media[0].url || "/placeholder.svg"}
+							alt={project.media[0].title || project.title}
+							class="w-full h-auto"
+						/>
+					</button>
 				</div>
 
 				<!-- Project Details - Right 1/3 on desktop, below image on mobile -->
@@ -68,12 +99,17 @@
 				<div class="masonry-grid">
 					{#each project.media.slice(1) as image, i}
 						<div class="masonry-item">
-							<img
-								src={image.url || "/placeholder.svg"}
-								alt={image.title || `${project.title} - Image ${i + 2}`}
-								class="w-full h-auto"
-								loading="lazy"
-							/>
+							<button 
+								class="w-full cursor-zoom-in focus:outline-none transform transition-transform duration-200 hover:opacity-95 hover:scale-[1.005]"
+								on:click={() => openModal(i + 1)}
+							>
+								<img
+									src={image.url || "/placeholder.svg"}
+									alt={image.title || `${project.title} - Image ${i + 2}`}
+									class="w-full h-auto"
+									loading="lazy"
+								/>
+							</button>
 						</div>
 					{/each}
 				</div>
@@ -86,12 +122,22 @@
 	</div>
 
 	<!-- Contact Section with Top Gradient -->
-<section class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 pt-24 pb-12">
-  <!-- Top gradient from black to transparent -->
-  <!-- <div class="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-black to-transparent pointer-events-none"></div> -->
-  <Contact />
-</section>
+	<section class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 pt-24 pb-12">
+		<Contact />
+	</section>
 
+	<!-- Image Modal with Navigation -->
+	{#if allImages.length > 0}
+		<ImageModal 
+			bind:isOpen={isModalOpen} 
+			imageUrl={allImages[currentImageIndex]?.url || ''} 
+			imageTitle={allImages[currentImageIndex]?.title || ''} 
+			onPrevious={goToPreviousImage}
+			onNext={goToNextImage}
+			hasPrevious={currentImageIndex > 0}
+			hasNext={currentImageIndex < allImages.length - 1}
+		/>
+	{/if}
 </main>
 
 <style>

@@ -42,9 +42,9 @@
 <div class="flex flex-col space-y-4">
   <!-- Back to Work link -->
   <a href="/#work" class="inline-flex items-center text-foreground/20 hover:text-foreground transition-colors">
-    <Button variant="secondary" class="bg-foreground/5 p-3 h-auto flex items-center gap-1">
-      <ChevronLeft class="h-4 w-4 opacity-40" />
-      <!-- <span class="text-foreground/s50">Work</span> -->
+    <Button variant="ghost" class="bg-muted/30 pl-2 pr-4 h-auto flex items-center gap-1">
+      <ChevronLeft class="h-4 w-4" />
+      <span class="font-thsin mb-[2px]">Work</span>
     </Button>
   </a>
 

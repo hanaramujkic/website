@@ -36,7 +36,7 @@
 <Dialog.Root bind:open={isOpen}>
   <Dialog.Content class="max-w-[95vw] sm:max-w-[90vw] p-0 border-none bg-transparent shadow-none">
     <div class="relative">
-      <!-- Close button -->
+      <!-- Close button  -->
       <Button 
         variant="ghost" 
         size="icon" 

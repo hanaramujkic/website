@@ -10,10 +10,10 @@
 
 	// Create an array of project details to simplify rendering
 	const projectDetails = [
-		{ label: "Regie", value: project.director },
-		{ label: "Musik", value: project.conductor },
+		{ label: "Director", value: project.director },
+		{ label: "Conductor", value: project.conductor },
 		{ label: "Set Design", value: project.setDesigner },
-		{ label: "Kostüme", value: project.costumeDesigner },
+		{ label: "Costume Design", value: project.costumeDesigner },
 		{ label: "Mask Design & Sculpting", value: project.maskDesignAndSculpting },
 		{ label: "Photos", value: project.photographer },
 	].filter((detail) => detail.value); // Filter out undefined values

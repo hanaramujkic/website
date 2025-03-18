@@ -83,7 +83,7 @@
       <!-- Desktop Actions -->
       <div class="hidden md:flex items-center space-x-4">
         <a 
-          href="./Hana_Ramujkic_Biography_eng2024.pdf" 
+          href="./Hana_Ramujkic_Resume_EN_2025.pdf" 
           target="_blank" 
           rel="noopener noreferrer"
         >

@@ -17,6 +17,7 @@
 		conductor: "Musical direction",
 		director: "Directed by",
 		venue: "Theatre",
+		concept: "Concept",
 	};
 
 	$: projectDetails = Object.entries(fieldLabels).reduce<DetailItem[]>(

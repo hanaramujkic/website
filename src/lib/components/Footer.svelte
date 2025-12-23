@@ -55,7 +55,7 @@
             </ul>
 
             <a 
-              href="./Hana_Ramujkic_Resume_EN_2025.pdf" 
+              href="./Hana_Ramujkic_Resume_2026.pdf" 
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -76,7 +76,7 @@
           © {new Date().getFullYear()} 
 						<span class="text-white/20">
 							• dev by
-							<a href="https://pipewriter.io" class="hover:underline hover:text-foreground">pipewriter</a>
+							<a href="https://veenie.space" class="hover:underline hover:text-foreground">veenie</a>
 						</span>
         </div>
       </div>

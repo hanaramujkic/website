@@ -6,7 +6,7 @@
   import type { Project } from '$lib/server/contentful';
 
   export let projects: Project[] = [];
-  let visibleProjects = 8;
+  let visibleProjects = 9;
 
   $: gridItems = projects.slice(0, visibleProjects);
 

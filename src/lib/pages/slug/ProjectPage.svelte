@@ -10,6 +10,7 @@
 
 	// Create an array of project details to simplify rendering
 	const projectDetails = [
+		{ label: "Concept", value: project.concept },
 		{ label: "Director", value: project.director },
 		{ label: "Conductor", value: project.conductor },
 		{ label: "Set Design", value: project.setDesigner },

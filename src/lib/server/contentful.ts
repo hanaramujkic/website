@@ -19,6 +19,7 @@ export interface Project {
 	director?: string;
 	setDesigner?: string;
 	costumeDesigner?: string;
+	concept?: string;
 	maskDesignAndSculpting?: string;
 	city?: {
 		lat: number;
@@ -90,6 +91,7 @@ function mapContentfulItemToProject(item: any): Project {
 		venue: item.fields.venue,
 		writer: item.fields.writer,
 		conductor: item.fields.conductor,
+		concept: item.fields.concept,
 		director: item.fields.director,
 		setDesigner: item.fields.setDesigner,
 		costumeDesigner: item.fields.costumeDesigner,
@@ -98,8 +100,9 @@ function mapContentfulItemToProject(item: any): Project {
 		photographer: item.fields.photographer,
 		media: item.fields.media?.map((media: any) => {
 			if (media?.fields?.file) {
+				const baseUrl = `https:${media.fields.file.url}`;
 				return {
-					url: `https:${media.fields.file.url}`,
+					url: `${baseUrl}?w=2400&q=85&fm=webp`,
 					title: media.fields.title || 'Untitled',
 				};
 			}

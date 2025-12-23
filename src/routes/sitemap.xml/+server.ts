@@ -11,7 +11,7 @@ export const GET = (async () => {
 
 	const slugMap = {
 		"Die Riesen vom Berge": "die-riesen-vom-berge",
-		"Kapitän Nemos Bibliothek": "kapitan-nemos-bibliothek",
+		"KapitÃ¤n Nemos Bibliothek": "kapitan-nemos-bibliothek",
 		"Dippel. Diagnose Cin 3": "dippel-diagnose-cin-3",
 		"Reigen": "reigen",
 		"Melancholia": "melancholia",
@@ -44,7 +44,7 @@ export const GET = (async () => {
         <priority>0.8</priority>
         ${project.media.slice(0, 5).map(media => `
         <image:image>
-            <image:loc>${media.url}</image:loc>
+            <image:loc>${media.url.replace(/&/g, '&amp;')}</image:loc>
         </image:image>`).join('')}
     </url>`
 	}).join('')}

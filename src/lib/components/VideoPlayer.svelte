@@ -1,81 +1,170 @@
 <!-- src/lib/components/VideoPlayer.svelte -->
 <script lang="ts">
-  import { Play, X } from 'lucide-svelte';
-  
+  import { onMount } from 'svelte';
+  import { Volume2, VolumeX } from 'lucide-svelte';
+
   export let videoId = '8Dyvs9qxpz8';
-  let showPlayer = false;
+  export let start = 8;
+  export let end = 92; // 1:32
 
-  function openVideoPlayer() {
-    showPlayer = true;
-  }
+  let playerContainer: HTMLDivElement;
+  let player: any = null;
+  let isMuted = true;
+  let loopInterval: ReturnType<typeof setInterval> | null = null;
 
-  function closeVideoPlayer() {
-    showPlayer = false;
-  }
-
-  function handleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Escape' && showPlayer) {
-      closeVideoPlayer();
+  declare global {
+    interface Window {
+      YT: any;
+      onYouTubeIframeAPIReady: (() => void) | undefined;
     }
   }
+
+  function loadYouTubeAPI(): Promise<void> {
+    return new Promise((resolve) => {
+      if (window.YT && window.YT.Player) {
+        resolve();
+        return;
+      }
+
+      const existingScript = document.querySelector(
+        'script[src="https://www.youtube.com/iframe_api"]'
+      );
+
+      if (!existingScript) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+      }
+
+      const previousCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        previousCallback?.();
+        resolve();
+      };
+    });
+  }
+
+  function startLoopWatcher() {
+    stopLoopWatcher();
+
+    loopInterval = setInterval(() => {
+      if (!player || typeof player.getCurrentTime !== 'function') return;
+
+      const currentTime = player.getCurrentTime();
+
+      if (currentTime >= end) {
+        player.seekTo(start, true);
+        player.playVideo();
+      }
+    }, 500);
+  }
+
+  function stopLoopWatcher() {
+    if (loopInterval) {
+      clearInterval(loopInterval);
+      loopInterval = null;
+    }
+  }
+
+  function createPlayer() {
+    if (!window.YT || !window.YT.Player || !playerContainer) return;
+
+    player = new window.YT.Player(playerContainer, {
+      videoId,
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        mute: 1,
+        loop: 0,
+        modestbranding: 1,
+        rel: 0,
+        playsinline: 1,
+        start,
+        end,
+        enablejsapi: 1,
+        iv_load_policy: 3,
+        disablekb: 1
+      },
+      events: {
+        onReady: (event: any) => {
+          event.target.mute();
+          event.target.seekTo(start, true);
+          event.target.playVideo();
+          isMuted = true;
+          startLoopWatcher();
+        },
+        onStateChange: (event: any) => {
+          if (window.YT && event.data === window.YT.PlayerState.ENDED) {
+            event.target.seekTo(start, true);
+            event.target.playVideo();
+          }
+        }
+      }
+    });
+  }
+
+  function toggleSound() {
+    if (!player) return;
+
+    if (isMuted) {
+      player.unMute();
+      isMuted = false;
+    } else {
+      player.mute();
+      isMuted = true;
+    }
+  }
+
+  onMount(async () => {
+    await loadYouTubeAPI();
+    createPlayer();
+
+    return () => {
+      stopLoopWatcher();
+
+      if (player && typeof player.destroy === 'function') {
+        player.destroy();
+      }
+    };
+  });
 </script>
 
-<svelte:window on:keydown={handleKeydown}/>
+<div class="relative w-full h-full overflow-hidden bg-black">
+  <!-- Background video -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute w-[120%] h-[120%] -left-[10%] -bottom-[10%] scale-125 youtube-player">
+      <div bind:this={playerContainer} class="w-full h-full"></div>
+    </div>
+  </div>
 
-<!-- Background Video Container -->
-<div class="relative w-[120%] h-full -left-[10%] overflow-hidden">
-  <iframe
-    src="https://www.youtube.com/embed/{videoId}?autoplay=1&controls=0&mute=1&loop=1&playlist={videoId}&start=8&modestbranding=1"
-    class="absolute w-full h-[120%] -bottom-[10%] scale-125"
-    title="Background video"
-    style="pointer-events: none;"
-  ></iframe>
+  <!-- Gradient overlay -->
+  <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/35 to-transparent"></div>
 
-  <!-- Play Button Container - Forward click events -->
-  <button 
-    class="absolute inset-0 z-10"
-    on:click={() => openVideoPlayer()}
+  <!-- Content slot -->
+  <div class="absolute inset-0 z-20">
+    <slot />
+  </div>
+
+  <!-- Sound toggle -->
+  <button
+    on:click={toggleSound}
+    class="absolute bottom-8 right-4 sm:right-6 md:right-12 lg:right-16 xl:right-24 2xl:right-32 z-30 bg-black/50 text-white w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-black/70 transition"
+    aria-label="Toggle sound"
+    type="button"
   >
-    <slot name="play-button">
-      <button
-        class="absolute z-20 bg-white/20 hover:bg-white/30 rounded-full p-4 transition-all"
-      >
-        <Play class="w-8 h-8 text-white" />
-      </button>
-    </slot>
+    {#if isMuted}
+      <VolumeX size={16} strokeWidth={2} />
+    {:else}
+      <Volume2 size={16} strokeWidth={2} />
+    {/if}
   </button>
 </div>
 
-<!-- Modal -->
-{#if showPlayer}
-  <button 
-    class="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
-    on:click={closeVideoPlayer}
-  >
-    <button 
-      class="relative w-full max-w-5xl mx-4"
-      on:click|stopPropagation={() => {}}
-    >
-      <button
-        class="absolute -top-12 right-0 text-white/80 hover:text-white transition-colors"
-        on:click={closeVideoPlayer}
-      >
-        <X class="w-6 h-6" />
-      </button>
-      
-      <iframe
-        src="https://www.youtube.com/embed/{videoId}?autoplay=1&modestbranding=1"
-        class="w-full aspect-video rounded-lg"
-        title="Video player"
-        allowfullscreen
-      ></iframe>
-    </button>
-  </button>
-{/if}
-
 <style>
-  iframe {
+  .youtube-player :global(iframe) {
+    width: 100%;
+    height: 100%;
     border: 0;
+    pointer-events: none;
   }
 </style>
-

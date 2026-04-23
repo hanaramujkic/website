@@ -83,8 +83,7 @@
         end,
         enablejsapi: 1,
         iv_load_policy: 3,
-        disablekb: 1,
-        fs: 0
+        disablekb: 1
       },
       events: {
         onReady: (event: any) => {
@@ -132,8 +131,8 @@
 
 <div class="relative w-full h-full overflow-hidden bg-black">
   <!-- Background video -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute inset-0 youtube-player">
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute w-[120%] h-[120%] -left-[10%] -bottom-[10%] scale-125 youtube-player">
       <div bind:this={playerContainer} class="w-full h-full"></div>
     </div>
   </div>
@@ -162,21 +161,10 @@
 </div>
 
 <style>
-  .youtube-player {
-    transform: scale(1.35);
-    transform-origin: center center;
-  }
-
   .youtube-player :global(iframe) {
     width: 100%;
     height: 100%;
     border: 0;
     pointer-events: none;
-  }
-
-  @media (max-width: 767px) {
-    .youtube-player {
-      transform: scale(1.8);
-    }
   }
 </style>

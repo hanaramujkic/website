@@ -132,23 +132,23 @@
 <div class="relative w-full h-full overflow-hidden bg-black">
   <!-- Background video -->
   <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute w-[120%] h-[120%] -left-[10%] -bottom-[10%] scale-125 youtube-player">
+    <div class="absolute w-[120%] h-[120%] -left-[10%] -bottom-[10%] youtube-player">
       <div bind:this={playerContainer} class="w-full h-full"></div>
     </div>
   </div>
 
-  <!-- Gradient overlay -->
+  <!-- Overlay -->
   <div class="absolute inset-0 z-10 hero-overlay"></div>
 
-  <!-- Content slot -->
-<div class="absolute inset-0 z-20 pointer-events-none">
-  <slot />
-</div>
+  <!-- Content -->
+  <div class="absolute inset-0 z-20 pointer-events-none">
+    <slot />
+  </div>
 
   <!-- Sound toggle -->
   <button
     on:click={toggleSound}
-    class="absolute bottom-8 right-4 sm:right-6 md:right-12 lg:right-16 xl:right-24 2xl:right-32 z-30 bg-black/50 text-white w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-black/70 transition"
+    class="absolute bottom-8 right-4 sm:right-6 md:right-12 lg:right-16 xl:right-24 2xl:right-32 z-30 bg-black/50 text-white w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-black/70 transition pointer-events-auto"
     aria-label="Toggle sound"
     type="button"
   >
@@ -161,41 +161,39 @@
 </div>
 
 <style>
-.youtube-player {
-
-  transform: scale(1.28);
-
-  transform-origin: center center;
-
-}
-
-@media (max-width: 767px) {
-
   .youtube-player {
-
-    transform: scale(2.45);
-
+    transform: scale(1.25);
     transform-origin: center center;
-
   }
 
-}
+  .youtube-player :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: none;
+  }
 
-.hero-overlay {
-  background: linear-gradient(to right,
-    rgba(0,0,0,0.85),
-    rgba(0,0,0,0.35),
-    rgba(0,0,0,0)
-  );
-}
-
-@media (max-width: 767px) {
   .hero-overlay {
-    background: linear-gradient(to right,
-      rgba(0,0,0,0.20),
-      rgba(0,0,0,0.05),
-      rgba(0,0,0,0)
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0)
     );
   }
-}
+
+  @media (max-width: 767px) {
+    .youtube-player {
+      transform: scale(1.02);
+    }
+
+    .hero-overlay {
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.18),
+        rgba(0, 0, 0, 0.05),
+        rgba(0, 0, 0, 0)
+      );
+    }
+  }
 </style>

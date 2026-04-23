@@ -141,9 +141,9 @@
   <div class="absolute inset-0 z-10 hero-overlay"></div>
 
   <!-- Content slot -->
-  <div class="absolute inset-0 z-20">
-    <slot />
-  </div>
+<div class="absolute inset-0 z-20 pointer-events-none">
+  <slot />
+</div>
 
   <!-- Sound toggle -->
   <button

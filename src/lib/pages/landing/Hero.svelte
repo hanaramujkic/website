@@ -5,45 +5,47 @@
 
 <section class="bg-black text-white">
   <!-- Mobile -->
-<div class="md:hidden">
-  <div class="px-4 pt-16 pb-8">
-    <div class="text-right flex flex-col items-end gap-1">
-      <h1 class="text-[2rem] font-medium tracking-wide leading-[0.95]">
-        SCENOGRAPHY
-      </h1>
-      <h1 class="text-[2rem] font-medium tracking-wide leading-[0.95]">
-        + COSTUME
-      </h1>
-      <h1 class="text-[2rem] font-medium tracking-wide leading-[0.95]">
-        DESIGN
-      </h1>
+  <div class="md:hidden">
+    <div class="px-4 pt-24 pb-12">
+      <div class="text-right flex flex-col items-end gap-2">
+        <h1 class="text-[2.2rem] font-medium tracking-wide leading-[0.95]">
+          SCENOGRAPHY
+        </h1>
+        <h1 class="text-[2.2rem] font-medium tracking-wide leading-[0.95]">
+          + COSTUME
+        </h1>
+        <h1 class="text-[2.2rem] font-medium tracking-wide leading-[0.95]">
+          DESIGN
+        </h1>
+      </div>
+    </div>
+
+    <div class="px-3 pb-10">
+      <div class="aspect-video overflow-hidden bg-black">
+        <VideoPlayer
+          src="/die_riesen_vom_berge_hero.mp4"
+          poster=""
+          start={8}
+          end={91}
+          fit="contain"
+        />
+      </div>
+    </div>
+
+    <div class="px-4 pb-12">
+      <h2 class="text-[1.15rem] font-semibold mb-2">
+        Die Riesen vom Berge
+      </h2>
+
+      <p class="text-base text-white/85 mb-4">
+        Luigi Pirandello
+      </p>
+
+      <p class="text-sm text-white/75">
+        Staatstheater Wiesbaden
+      </p>
     </div>
   </div>
-
-  <div class="px-3 pb-8">
-    <div class="aspect-video overflow-hidden bg-black">
-      <VideoPlayer
-        src="/die_riesen_vom_berge_hero.mp4"
-        poster=""
-        fit="cover"
-      />
-    </div>
-  </div>
-
-  <div class="px-4 pb-20">
-    <h2 class="text-[1.15rem] font-semibold mb-2">
-      Die Riesen vom Berge
-    </h2>
-
-    <p class="text-base text-white/80 mb-4">
-      Luigi Pirandello
-    </p>
-
-    <p class="text-sm text-white/65">
-      Staatstheater Wiesbaden
-    </p>
-  </div>
-</div>
 
 <!-- Desktop -->
 <div class="hidden md:block relative w-full h-[72vh] lg:h-[76vh] xl:h-[80vh] overflow-hidden bg-black mb-36 lg:mb-44 xl:mb-52">

@@ -38,7 +38,7 @@
   
   <!-- Content sections -->
   <div class="mx-auto max-w-[1920px]">
-    <section id="work" class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 mt-[12vh] py-6">
+    <section id="work" class="relative px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 mt-[12vh] md:mt-[14vh] lg:mt-[17vh] xl:mt-[20vh] py-6">
       <h1 
         class="absolute top-1 ml-8 transition-transform duration-700 ease-out
                text-5xl sm:text-5xl md:text-6xl font-medium tracking-wide 

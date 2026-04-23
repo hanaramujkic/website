@@ -30,6 +30,11 @@ export interface Project {
 		url: string;
 		title: string;
 	}[];
+	heroVideo?: {
+		url: string;
+		title: string;
+		contentType?: string;
+	};
 	projectDescription: any;
 	spot?: number;
 	tags?: string[];
@@ -98,19 +103,29 @@ function mapContentfulItemToProject(item: any): Project {
 		maskDesignAndSculpting: item.fields.maskDesignAndSculpting,
 		city: item.fields.city,
 		photographer: item.fields.photographer,
-		media: item.fields.media?.map((media: any) => {
-			if (media?.fields?.file) {
-				const baseUrl = `https:${media.fields.file.url}`;
-				return {
-					url: `${baseUrl}?w=2400&q=85&fm=webp`,
-					title: media.fields.title || 'Untitled',
-				};
-			}
-			return null;
-		}).filter(Boolean) || [],
+		media:
+			item.fields.media
+				?.map((media: any) => {
+					if (media?.fields?.file) {
+						const baseUrl = `https:${media.fields.file.url}`;
+						return {
+							url: `${baseUrl}?w=2400&q=85&fm=webp`,
+							title: media.fields.title || 'Untitled'
+						};
+					}
+					return null;
+				})
+				.filter(Boolean) || [],
+		heroVideo: item.fields.heroVideo?.fields?.file
+			? {
+					url: `https:${item.fields.heroVideo.fields.file.url}`,
+					title: item.fields.heroVideo.fields.title || 'Hero video',
+					contentType: item.fields.heroVideo.fields.file.contentType
+				}
+			: undefined,
 		projectDescription: item.fields.projectDescription,
 		spot: item.fields.spot,
-		tags: item.fields.tags,
+		tags: item.fields.tags
 	};
 }
 

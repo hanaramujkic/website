@@ -138,7 +138,7 @@
   </div>
 
   <!-- Gradient overlay -->
-  <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/35 to-transparent"></div>
+  <div class="absolute inset-0 z-10 hero-overlay"></div>
 
   <!-- Content slot -->
   <div class="absolute inset-0 z-20">
@@ -179,5 +179,23 @@
 
   }
 
+}
+
+.hero-overlay {
+  background: linear-gradient(to right,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0.35),
+    rgba(0,0,0,0)
+  );
+}
+
+@media (max-width: 767px) {
+  .hero-overlay {
+    background: linear-gradient(to right,
+      rgba(0,0,0,0.20),
+      rgba(0,0,0,0.05),
+      rgba(0,0,0,0)
+    );
+  }
 }
 </style>

@@ -53,17 +53,37 @@
 			<div class="flex flex-col md:flex-row md:gap-12 lg:gap-16 xl:gap-20 mb-8">
 				<!-- Featured Image - Left 2/3 on desktop, full width on mobile -->
 				<div class="w-full md:w-2/3 mb-8 md:mb-0">
-					<button 
-						class="w-full cursor-zoom-in focus:outline-none transform transition-transform duration-200 hover:opacity-95 hover:scale-[1.005]"
-						on:click={() => openModal(0)}
-					>
-						<img
-							src={project.media[0].url || "/placeholder.svg"}
-							alt={project.media[0].title || project.title}
-							class="w-full h-auto"
-						/>
-					</button>
-				</div>
+	{#if project.heroVideo?.url}
+		<div class="w-full overflow-hidden bg-black">
+			<video
+				class="w-full h-auto object-cover"
+				autoplay
+				muted
+				loop
+				playsinline
+				preload="metadata"
+				poster={project.media?.[0]?.url || "/placeholder.svg"}
+			>
+				<source
+					src={project.heroVideo.url}
+					type={project.heroVideo.contentType || "video/mp4"}
+				/>
+				Your browser does not support the video tag.
+			</video>
+		</div>
+	{:else}
+		<button
+			class="w-full cursor-zoom-in focus:outline-none transform transition-transform duration-200 hover:opacity-95 hover:scale-[1.005]"
+			on:click={() => openModal(0)}
+		>
+			<img
+				src={project.media[0].url || "/placeholder.svg"}
+				alt={project.media[0].title || project.title}
+				class="w-full h-auto"
+			/>
+		</button>
+	{/if}
+</div>
 
 				<!-- Project Details - Right 1/3 on desktop, below image on mobile -->
 				<div class="pt-6 pl-6 md:pl-0 w-full md:w-1/3">

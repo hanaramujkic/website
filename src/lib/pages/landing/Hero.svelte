@@ -7,16 +7,18 @@
   <VideoPlayer>
     <!-- Shared page-width container -->
     <div class="absolute inset-0 z-20 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">
-      
-      <!-- Main hero headline -->
-      <div class="absolute top-24 sm:top-28 md:top-32 left-1/2 -translate-x-1/2">
-        <div class="text-white text-right flex flex-col items-end md:gap-4">
+
+      <!-- Main headline -->
+      <div class="absolute top-20 sm:top-24 md:top-28 left-1/2 -translate-x-1/2">
+        <div class="text-white text-right flex flex-col items-end gap-1 sm:gap-2 md:gap-4">
           <h1 class="text-[2.5em] sm:text-5xl md:text-6xl font-medium tracking-wide whitespace-nowrap">
             SCENOGRAPHY
           </h1>
+
           <h1 class="text-[2.5em] sm:text-5xl md:text-6xl font-medium tracking-wide whitespace-nowrap">
             + COSTUME
           </h1>
+
           <h1 class="text-[2.5em] sm:text-5xl md:text-6xl font-medium tracking-wide whitespace-nowrap">
             DESIGN
           </h1>
@@ -29,18 +31,15 @@
           Die Riesen vom Berge
         </h2>
 
-        <p class="text-xs sm:text-sm md:text-[15px] text-white/85 mb-4">
+        <p class="text-xs sm:text-sm md:text-[15px] text-white/85 mb-3">
           Luigi Pirandello
         </p>
 
-        <div class="space-y-1 text-[10px] sm:text-[11px] md:text-[13px] leading-[1.35] text-white/80">
-          <p>Staatstheater Wiesbaden</p>
-          <p><span class="font-semibold text-white/95">Director</span> Ingo Kerkhof</p>
-          <p><span class="font-semibold text-white/95">Set Design</span> Hana Ramujkic</p>
-          <p><span class="font-semibold text-white/95">Costume Design</span> Britta Leonhardt</p>
-          <p><span class="font-semibold text-white/95">Photos</span> Karl und Monika Forster</p>
-        </div>
+        <p class="text-[10px] sm:text-[11px] md:text-[13px] leading-[1.35] text-white/80">
+          Staatstheater Wiesbaden
+        </p>
       </div>
+
     </div>
   </VideoPlayer>
 </div>

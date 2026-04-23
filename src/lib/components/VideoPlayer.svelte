@@ -161,10 +161,23 @@
 </div>
 
 <style>
-  .youtube-player :global(iframe) {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    pointer-events: none;
+.youtube-player {
+
+  transform: scale(1.28);
+
+  transform-origin: center center;
+
+}
+
+@media (max-width: 767px) {
+
+  .youtube-player {
+
+    transform: scale(2.45);
+
+    transform-origin: center center;
+
   }
+
+}
 </style>

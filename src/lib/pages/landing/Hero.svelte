@@ -61,7 +61,7 @@
       <div class="absolute inset-0 z-20 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32">
 
         <!-- MAIN TITLE -->
-        <div class="absolute top-20 lg:top-24 xl:top-28 left-1/2 -translate-x-1/2">
+        <div class="absolute top-24 lg:top-28 xl:top-32 left-[36%] lg:left-[35%] xl:left-[34%] -translate-x-1/2">
           <div class="text-white text-right flex flex-col items-end gap-1 md:gap-2">
 
             <h1 class="text-5xl lg:text-[4rem] xl:text-[4.4rem] font-medium tracking-wide leading-none whitespace-nowrap">

@@ -37,7 +37,7 @@
   </div>
 
   <!-- Desktop -->
-  <div class="hidden xl:block relative w-full h-[80vh] overflow-hidden bg-black mb-52">
+  <div class="hidden xl:block relative w-full h-[80vh] overflow-hidden bg-black mb-32">
     <VideoPlayer
       src="/die_riesen_vom_berge_hero.mp4"
       poster=""

@@ -5,20 +5,21 @@
   import Navbar from "$lib/components/Navbar.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import { ModeWatcher } from "mode-watcher";
-  
+
   export let data;
-  
-  $: currentSlug = $page.url.pathname.slice(1) || 'home';
+
+  $: currentSlug = $page.url.pathname.slice(1) || "home";
   $: seoData = data.metadata[currentSlug] || data.metadata.home;
 </script>
 
 <svelte:head>
+  <!-- Primary SEO -->
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href={seoData.url} />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content={seoData.url} />
   <meta property="og:title" content={seoData.title} />
@@ -32,19 +33,22 @@
   <meta name="twitter:description" content={seoData.description} />
   <meta name="twitter:image" content={seoData.image} />
 
-  <!-- Additional SEO Meta Tags -->
+  <!-- SEO Extras -->
   <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="set designer, costume designer, theater design, scenography, stage design, theatrical design, performance art, theater production, stage art, theatrical costume" />
+  <meta
+    name="keywords"
+    content="Hana Ramujkic, stage designer, costume designer, opera designer, theatre designer, scenography, set design Austria, costume design Vienna, opera stage design"
+  />
   <meta name="author" content="Hana Ramujkic" />
 
-  <!-- Schema.org JSON-LD -->
+  <!-- Structured Data -->
   {@html `
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Hana Ramujkic",
-      "jobTitle": "Set and Costume Designer",
+      "jobTitle": "Stage and Costume Designer",
       "description": "${seoData.description}",
       "url": "${seoData.url}",
       "image": "${seoData.image}",
@@ -52,15 +56,16 @@
         "https://www.instagram.com/hana.ramujkic"
       ],
       "workLocation": {
-        "@type": "City",
-        "name": "Vienna"
+        "@type": "Place",
+        "name": "Austria"
       },
       "knowsAbout": [
-        "Set Design",
+        "Stage Design",
         "Costume Design",
-        "Theater Production",
+        "Opera Design",
+        "Theatre Design",
         "Scenography",
-        "Stage Design"
+        "Set Design"
       ]
     }
     </script>
@@ -70,5 +75,5 @@
 <ModeWatcher />
 
 <Navbar />
-<slot></slot>
+<slot />
 <Footer />

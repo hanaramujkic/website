@@ -34,7 +34,7 @@
                 <!-- <div>RAMUJKIC</div> -->
               </div>
               <p class="text-xl font-medium text-white/20">
-                Scenographer & Costume Designer
+                Stage & Costume Designer
               </p>
             </div>
           </div>
